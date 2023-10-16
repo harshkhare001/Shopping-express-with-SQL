@@ -56,13 +56,13 @@ exports.postEditProduct = (req, res, next) => {
 };
 
 exports.getProducts = (req, res, next) => {
-  Product.fetchAll(products => {
+  Product.fetchAll().then(([product,file])=>{
     res.render('admin/products', {
-      prods: products,
+      prods: product,
       pageTitle: 'Admin Products',
       path: '/admin/products'
     });
-  });
+  }).catch((err)=>console.log(err));
 };
 
 exports.postDeleteProduct = (req, res, next) => {
